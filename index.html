@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Robot Patrouilleur ENSIAS</title>
+
+<style>
+    /* --- GENERAL --- */
+    body {
+        background: #0a0a0a;
+        color: #00ff00; /* military green */
+        font-family: 'Lucida Console', Monaco, monospace;
+        text-align: center;
+        margin: 0;
+        padding: 0;
+    }
+
+    /* --- HEADER LOGOS --- */
+    .header-logos {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 40px;
+        padding: 15px 0;
+        border-bottom: 2px solid #00ff00;
+    }
+
+    .header-logos img {
+        height: 180px; /* Adjust logo size */
+    }
+
+    h2, h3 {
+        font-weight: 300;
+        text-shadow: 0 0 5px #00ff00;
+    }
+
+    /* --- CAMERA FEED --- */
+    #camera {
+        margin-top: 15px;
+        border-radius: 8px;
+        border: 3px solid #00ff00;
+        transform: rotate(360deg); /* flip camera */
+        width: 80%;
+        max-width: 650px;
+        box-shadow: 0 0 20px #00ff00;
+    }
+
+    /* --- BUTTONS --- */
+    .controls, .camera-controls {
+        margin-top: 25px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 15px;
+    }
+
+    .row {
+        display: flex;
+        gap: 18px;
+        justify-content: center;
+    }
+
+    button {
+        background: #111;
+        border: 2px solid #00ff00;
+        color: #00ff00;
+        padding: 14px 24px;
+        font-size: 18px;
+        border-radius: 6px;
+        cursor: pointer;
+        transition: 0.25s;
+        min-width: 130px;
+        box-shadow: 0 0 10px #00ff00;
+    }
+
+    button:hover {
+        background: #00ff00;
+        color: #000;
+        border-color: #00ff00;
+    }
+
+    button:active {
+        transform: scale(0.95);
+    }
+
+    footer {
+        margin-top: 40px;
+        padding: 15px;
+        font-size: 16px;
+        color: #00ff00;
+        text-align: center;
+        border-top: 2px solid #00ff00;
+        text-shadow: 0 0 3px #00ff00;
+    }
+</style>
+
+<script>
+function sendCommand(cmd){
+    fetch(cmd);
+}
+</script>
+</head>
+
+<body>
+
+<!-- ===== TOP LOGOS ===== -->
+<div class="header-logos">
+    <img src="/static/logo1.png" alt="Logo 1">
+
+</div>
+
+<h2>Robot Patrouilleur ENSIAS</h2>
+
+<!-- Camera feed -->
+<img id="camera" src="{{ url_for('video_feed') }}">
+
+<h3>Movement Controls</h3>
+<div class="controls">
+    <div class="row">
+        <button onclick="sendCommand('/forward')">Forward </button>
+    </div>
+    <div class="row">
+        <button onclick="sendCommand('/left')"> Left</button>
+        <button onclick="sendCommand('/stop')">Stop </button>
+        <button onclick="sendCommand('/right')">Right </button>
+    </div>
+    <div class="row">
+        <button onclick="sendCommand('/backward')">Backward </button>
+    </div>
+</div>
+
+<h3>Camera Pan/Tilt</h3>
+<div class="camera-controls">
+    <div class="row">
+        <button onclick="sendCommand('/tilt_up')">Tilt Up </button>
+    </div>
+    <div class="row">
+        <button onclick="sendCommand('/pan_left')">Pan Left </button>
+        <button onclick="sendCommand('/pan_right')">Pan Right </button>
+    </div>
+    <div class="row">
+        <button onclick="sendCommand('/tilt_down')">Tilt Down </button>
+    </div>
+</div>
+
+<footer>
+    Project made by <b>Mouad BEZZAZ</b> & <b>Ayyoub BENMANSOUR</b>
+</footer>
+
+</body>
+</html>
+
